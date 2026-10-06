@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Магазин рыболовной прикормки и наживки. Сухая прикормка, бойлы, живая наживка, растительные насадки, живец, аттрактанты.">
+<title>Рыболовный привал — прикормка и наживка</title>
+<style>
+:root {
+  --green: #2e7d32;
+  --green-dark: #1b5e20;
+  --green-light: #4caf50;
+  --blue: #1565c0;
+  --blue-light: #e3f2fd;
+  --amber: #ff8f00;
+  --bg: #f5f5f5;
+  --card-bg: #ffffff;
+  --text: #212121;
+  --text-muted: #757575;
+  --border: #e0e0e0;
+  --red: #c62828;
+  --shadow: 0 2px 8px rgba(0,0,0,0.1);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,0.15);
+  --radius: 12px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* ===== HEADER ===== */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--green-dark);
+  color: #fff;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+}
+.header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  gap: 20px;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 22px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+.logo-icon { font-size: 28px; }
+.logo span { color: var(--amber); }
+
+.nav {
+  display: flex;
+  gap: 28px;
+  align-items: center;
+}
+.nav a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  opacity: 0.9;
+  transition: opacity .2s, color .2s;
+}
+.nav a:hover { opacity: 1; color: var(--amber); }
+
+.cart-btn {
+  position: relative;
+  background: var(--green-light);
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  padding: 10px 22px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .2s, transform .15s;
+  white-space: nowrap;
+}
+.cart-btn:hover { background: #66bb6a; transform: scale(1.04); }
+.cart-btn:active { transform: scale(0.98); }
+.cart-count {
+  background: var(--amber);
+  color: #000;
+  border-radius: 50%;
+  min-width: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 800;
+  margin-left: 8px;
+  padding: 0 4px;
+}
+
+.burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+}
+.burger span {
+  width: 26px;
+  height: 3px;
+  background: #fff;
+  border-radius: 2px;
+  transition: .3s;
+}
+
+/* ===== HERO ===== */
+.hero {
+  background: linear-gradient(135deg, var(--green-dark) 0%, var(--green) 50%, var(--blue) 100%);
+  color: #fff;
+  padding: 70px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '🎣';
+  position: absolute;
+  font-size: 180px;
+  opacity: 0.08;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.hero h1 {
+  font-size: clamp(28px, 5vw, 48px);
+  font-weight: 800;
+  margin-bottom: 16px;
+  position: relative;
+}
+.hero p {
+  font-size: clamp(15px, 2.5vw, 20px);
+  opacity: 0.92;
+  max-width: 600px;
+  margin: 0 auto 28px;
+  position: relative;
+}
+.hero-cta {
+  background: var(--amber);
+  color: #000;
+  border: none;
+  border-radius: 50px;
+  padding: 16px 40px;
+  font-size: 18px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform .2s, box-shadow .2s;
+  position: relative;
+}
+.hero-cta:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(255,143,0,0.4); }
+.hero-cta:active { transform: translateY(0); }
+
+/* ===== CATEGORIES ===== */
+.section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 50px 20px;
+}
+.section-title {
+  font-size: 30px;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 8px;
+}
+.section-subtitle {
+  text-align: center;
+  color: var(--text-muted);
+  margin-bottom: 36px;
+  font-size: 16px;
+}
+
+.categories {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+  margin-bottom: 50px;
+}
+.cat-card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  padding: 24px 16px;
+  text-align: center;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: transform .2s, box-shadow .2s;
+  border: 2px solid transparent;
+}
+.cat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--green-light);
+}
+.cat-icon { font-size: 40px; margin-bottom: 10px; }
+.cat-name { font-weight: 700; font-size: 15px; }
+.cat-desc { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+
+/* ===== PRODUCTS ===== */
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 22px;
+}
+.product-card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform .2s, box-shadow .2s;
+  display: flex;
+  flex-direction: column;
+}
+.product-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.product-img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  background: #e8f5e9;
+}
+.product-body {
+  padding: 16px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.product-badge {
+  display: inline-block;
+  background: var(--blue-light);
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin-bottom: 8px;
+  width: fit-content;
+}
+.product-badge.hit { background: #fff3e0; color: var(--amber); }
+.product-badge.new { background: #e8f5e9; color: var(--green); }
+.product-name {
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.product-desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+  flex: 1;
+}
+.product-price {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--green-dark);
+  margin-bottom: 12px;
+}
+.product-price .unit { font-size: 14px; font-weight: 500; color: var(--text-muted); }
+.add-btn {
+  background: var(--green);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .2s, transform .15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.add-btn:hover { background: var(--green-dark); }
+.add-btn:active { transform: scale(0.97); }
+.add-btn.added { background: var(--green-light); }
+
+/* ===== ABOUT ===== */
+.about {
+  background: var(--green-dark);
+  color: #fff;
+  text-align: center;
+  padding: 60px 20px;
+}
+.about h2 { font-size: 30px; font-weight: 800; margin-bottom: 14px; }
+.about p { max-width: 600px; margin: 0 auto 30px; opacity: 0.9; font-size: 16px; }
+.about-stats {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  flex-wrap: wrap;
+}
+.stat-item { text-align: center; }
+.stat-num { font-size: 40px; font-weight: 800; color: var(--amber); }
+.stat-label { font-size: 14px; opacity: 0.8; }
+
+/* ===== CONTACTS ===== */
+.contact-form {
+  max-width: 520px;
+  margin: 0 auto;
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  padding: 32px;
+  box-shadow: var(--shadow);
+}
+.form-group { margin-bottom: 18px; }
+.form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+  font-size: 15px;
+}
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  font-size: 15px;
+  font-family: inherit;
+  transition: border-color .2s;
+}
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--green-light);
+}
+.form-group textarea { resize: vertical; min-height: 100px; }
+.form-error { color: var(--red); font-size: 13px; margin-top: 4px; display: none; }
+.form-btn {
+  width: 100%;
+  background: var(--green);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .2s;
+}
+.form-btn:hover { background: var(--green-dark); }
+
+/* ===== CART DRAWER ===== */
+.cart-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 200;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .3s, visibility .3s;
+}
+.cart-overlay.open { opacity: 1; visibility: visible; }
+
+.cart-drawer {
+  position: fixed;
+  top: 0;
+  right: -440px;
+  width: 420px;
+  max-width: 100%;
+  height: 100%;
+  background: #fff;
+  z-index: 210;
+  transition: right .35s ease;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -4px 0 24px rgba(0,0,0,0.15);
+}
+.cart-drawer.open { right: 0; }
+
+.cart-header {
+  background: var(--green-dark);
+  color: #fff;
+  padding: 18px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.cart-header h2 { font-size: 20px; font-weight: 700; }
+.cart-close {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 28px;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background .2s;
+}
+.cart-close:hover { background: rgba(255,255,255,0.15); }
+
+.cart-items {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+}
+.cart-empty {
+  text-align: center;
+  color: var(--text-muted);
+  padding: 60px 20px;
+  font-size: 16px;
+}
+.cart-empty span { font-size: 48px; display: block; margin-bottom: 12px; }
+
+.cart-item {
+  display: flex;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+.cart-item:last-child { border-bottom: none; }
+.cart-item-img {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  object-fit: cover;
+  background: #e8f5e9;
+  flex-shrink: 0;
+}
+.cart-item-info { flex: 1; min-width: 0; }
+.cart-item-name { font-weight: 700; font-size: 14px; margin-bottom: 4px; }
+.cart-item-price { font-size: 13px; color: var(--text-muted); }
+.cart-item-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+.qty-btn {
+  width: 28px;
+  height: 28px;
+  border: 2px solid var(--border);
+  border-radius: 6px;
+  background: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color .2s, background .2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+.qty-btn:hover { border-color: var(--green); background: var(--blue-light); }
+.qty-val { font-weight: 700; font-size: 15px; min-width: 30px; text-align: center; }
+.cart-item-remove {
+  margin-left: auto;
+  background: none;
+  border: none;
+  color: var(--red);
+  cursor: pointer;
+  font-size: 18px;
+  padding: 4px;
+  transition: opacity .2s;
+}
+.cart-item-remove:hover { opacity: 0.6; }
+
+.cart-footer {
+  padding: 20px;
+  border-top: 2px solid var(--border);
+  background: #fafafa;
+}
+.cart-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.cart-total-label { font-size: 18px; font-weight: 700; }
+.cart-total-value { font-size: 24px; font-weight: 800; color: var(--green-dark); }
+.checkout-btn {
+  width: 100%;
+  background: var(--amber);
+  color: #000;
+  border: none;
+  border-radius: 8px;
+  padding: 14px;
+  font-size: 17px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background .2s, transform .15s;
+}
+.checkout-btn:hover { background: #ffb74d; }
+.checkout-btn:active { transform: scale(0.98); }
+.checkout-btn:disabled { background: #bdbdbd; cursor: not-allowed; transform: none; }
+
+/* ===== CHECKOUT MODAL ===== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .3s, visibility .3s;
+  padding: 20px;
+}
+.modal-overlay.open { opacity: 1; visibility: visible; }
+.modal {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 32px;
+  max-width: 480px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+  transform: translateY(20px);
+  transition: transform .3s;
+}
+.modal-overlay.open .modal { transform: translateY(0); }
+.modal h2 { font-size: 24px; font-weight: 800; margin-bottom: 8px; }
+.modal-sub { color: var(--text-muted); margin-bottom: 22px; font-size: 14px; }
+.modal-close {
+  float: right;
+  background: none;
+  border: none;
+  font-size: 26px;
+  cursor: pointer;
+  color: var(--text-muted);
+  line-height: 1;
+}
+.modal-close:hover { color: var(--text); }
+.modal .form-btn { background: var(--green-dark); }
+.modal .form-btn:hover { background: var(--green); }
+.order-summary {
+  background: var(--bg);
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin-bottom: 20px;
+}
+.order-summary h3 { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+.order-line { display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 4px; }
+.order-line.total { font-weight: 800; font-size: 17px; border-top: 1px solid var(--border); padding-top: 8px; margin-top: 8px; }
+
+/* ===== TOAST ===== */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: var(--green-dark);
+  color: #fff;
+  padding: 14px 28px;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 15px;
+  z-index: 400;
+  opacity: 0;
+  transition: transform .35s, opacity .35s;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+/* ===== FOOTER ===== */
+.footer {
+  background: #1b1b1b;
+  color: #aaa;
+  padding: 40px 20px;
+  text-align: center;
+}
+.footer p { margin-bottom: 8px; font-size: 14px; }
+.footer a { color: var(--green-light); text-decoration: none; }
+.footer-social { margin-top: 16px; display: flex; gap: 16px; justify-content: center; font-size: 24px; }
+.footer-social a { font-size: 24px; transition: opacity .2s; }
+.footer-social a:hover { opacity: 0.7; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .nav { display: none; }
+  .nav.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--green-dark);
+    padding: 16px 20px;
+    gap: 14px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+  .burger { display: flex; }
+  .cart-btn { padding: 8px 16px; font-size: 14px; }
+  .hero { padding: 50px 20px; }
+  .about-stats { gap: 30px; }
+  .stat-num { font-size: 32px; }
+  .cart-drawer { width: 100%; right: -100%; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <div class="logo">
+      <span class="logo-icon">🐟</span>
+      Рыболовный <span>привал</span>
+    </div>
+    <nav class="nav" id="nav">
+      <a href="#categories">Категории</a>
+      <a href="#products">Каталог</a>
+      <a href="#about">О нас</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+    <button class="cart-btn" onclick="toggleCart()">
+      🛒 Корзина<span class="cart-count" id="cartCount">0</span>
+    </button>
+    <button class="burger" onclick="toggleNav()" aria-label="Меню">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>Прикормка и наживка для удачной рыбалки</h1>
+  <p>Всё для привлечения рыбы в одном месте: сухие и влажные прикормки, бойлы, живая наживка, аттрактанты. Доставка по всей России.</p>
+  <button class="hero-cta" onclick="scrollToProducts()">Перейти в каталог →</button>
+</section>
+
+<!-- CATEGORIES -->
+<section class="section" id="categories">
+  <h2 class="section-title">Категории товаров</h2>
+  <p class="section-subtitle">Выберите тип прикормки или наживки</p>
+  <div class="categories">
+    <div class="cat-card" onclick="filterCategory('all')">
+      <div class="cat-icon">📦</div>
+      <div class="cat-name">Все товары</div>
+      <div class="cat-desc">Полный каталог</div>
+    </div>
+    <div class="cat-card" onclick="filterCategory('dry')">
+      <div class="cat-icon">🌾</div>
+      <div class="cat-name">Сухая прикормка</div>
+      <div class="cat-desc">Смеси и корма</div>
+    </div>
+    <div class="cat-card" onclick="filterCategory('boilies')">
+      <div class="cat-icon">🟤</div>
+      <div class="cat-name">Бойлы</div>
+      <div class="cat-desc">Карповые бойлы</div>
+    </div>
+    <div class="cat-card" onclick="filterCategory('live')">
+      <div class="cat-icon">🪱</div>
+      <div class="cat-name">Живая наживка</div>
+      <div class="cat-desc">Червь, опарыш</div>
+    </div>
+    <div class="cat-card" onclick="filterCategory('plant')">
+      <div class="cat-icon">🌽</div>
+      <div class="cat-name">Растительные</div>
+      <div class="cat-desc">Кукуруза, горох</div>
+    </div>
+    <div class="cat-card" onclick="filterCategory('attract')">
+      <div class="cat-icon">💧</div>
+      <div class="cat-name">Аттрактанты</div>
+      <div class="cat-desc">Дипы, спреи</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="section" id="products" style="padding-top:0;">
+  <h2 class="section-title">Каталог товаров</h2>
+  <p class="section-subtitle" id="filterLabel">Все товары</p>
+  <div class="products" id="productsGrid"></div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <h2>О магазине «Рыболовный привал»</h2>
+  <p>Мы занимаемся продажей качественной рыболовной прикормки и наживки уже более 10 лет. Работаем напрямую с производителями, гарантируем свежесть живой наживки и правильное хранение всех товаров.</p>
+  <div class="about-stats">
+    <div class="stat-item">
+      <div class="stat-num">10+</div>
+      <div class="stat-label">лет на рынке</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">500+</div>
+      <div class="stat-label">товаров в каталоге</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">8500+</div>
+      <div class="stat-label">довольных клиентов</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">24ч</div>
+      <div class="stat-label">доставка по городу</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTS -->
+<section class="section" id="contacts">
+  <h2 class="section-title">Свяжитесь с нами</h2>
+  <p class="section-subtitle">Оставьте заявку — перезвоним в течение 15 минут</p>
+  <form class="contact-form" id="contactForm" onsubmit="return handleContact(event)">
+    <div class="form-group">
+      <label for="cName">Ваше имя</label>
+      <input type="text" id="cName" placeholder="Иван Иванов" required>
+    </div>
+    <div class="form-group">
+      <label for="cPhone">Телефон</label>
+      <input type="tel" id="cPhone" placeholder="+7 (___) ___-__-__" required>
+    </div>
+    <div class="form-group">
+      <label for="cMsg">Сообщение</label>
+      <textarea id="cMsg" placeholder="Какой товар вас интересует?"></textarea>
+    </div>
+    <button type="submit" class="form-btn">Отправить заявку</button>
+  </form>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p><strong>Рыболовный привал</strong> — прикормка и наживка для рыбалки</p>
+  <p>г. Саратов, ул. Рыболовная, д. 15 · Тел: <a href="tel:+78452123456">+7 (8452) 123-456</a></p>
+  <p>© 2024 Рыболовный привал. Все права защищены.</p>
+  <div class="footer-social">
+    <a href="#" title="VK">🟦</a>
+    <a href="#" title="Telegram">🔵</a>
+    <a href="#" title="WhatsApp">🟢</a>
+  </div>
+</footer>
+
+<!-- CART DRAWER -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<aside class="cart-drawer" id="cartDrawer">
+  <div class="cart-header">
+    <h2>🛒 Корзина</h2>
+    <button class="cart-close" onclick="toggleCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-footer">
+    <div class="cart-total">
+      <span class="cart-total-label">Итого:</span>
+      <span class="cart-total-value" id="cartTotal">0 ₽</span>
+    </div>
+    <button class="checkout-btn" id="checkoutBtn" onclick="openCheckout()" disabled>Оформить заказ</button>
+  </div>
+</aside>
+
+<!-- CHECKOUT MODAL -->
+<div class="modal-overlay" id="checkoutModal" onclick="closeCheckoutBg(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeCheckout()">✕</button>
+    <h2>Оформление заказа</h2>
+    <p class="modal-sub">Заполните данные для доставки. Мы свяжемся для подтверждения.</p>
+    <div class="order-summary" id="orderSummary"></div>
+    <form onsubmit="return submitOrder(event)">
+      <div class="form-group">
+        <label for="oName">Имя получателя *</label>
+        <input type="text" id="oName" required placeholder="Иван Иванов">
+      </div>
+      <div class="form-group">
+        <label for="oPhone">Телефон *</label>
+        <input type="tel" id="oPhone" required placeholder="+7 (___) ___-__-__">
+      </div>
+      <div class="form-group">
+        <label for="oAddress">Адрес доставки *</label>
+        <input type="text" id="oAddress" required placeholder="Город, улица, дом, квартира">
+      </div>
+      <div class="form-group">
+        <label for="oComment">Комментарий к заказу</label>
+        <textarea id="oComment" placeholder="Удобное время доставки, пожелания..."></textarea>
+      </div>
+      <button type="submit" class="form-btn">Подтвердить заказ</button>
+    </form>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ===== DATA =====
+const PRODUCTS = [
+  { id: 1, name: 'Прикормка «Фидерная» 1кг', cat: 'dry', price: 350, badge: 'hit', badgeText: 'Хит продаж',
+    desc: 'Универсальная сухая смесь для фидера. Привлекает леща, плотву, карася.', img: '🌾' },
+  { id: 2, name: 'Прикормка «Карп-Микс» 1кг', cat: 'dry', price: 420, badge: 'hit', badgeText: 'Хит продаж',
+    desc: 'Специальная смесь для ловли карпа и сазана. Сладкий аромат.', img: '🌽' },
+  { id: 3, name: 'Прикормка «Речной универсал» 0.5кг', cat: 'dry', price: 220, badge: '', badgeText: '',
+    desc: 'Подходит для любой речной рыбы. Быстро размывается в воде.', img: '🌾' },
+  { id: 4, name: 'Бойлы «Карамель» 15мм, 500г', cat: 'boilies', price: 580, badge: 'new', badgeText: 'Новинка',
+    desc: 'Карповые бойлы с ароматом карамели. Тонущие, плотная консистенция.', img: '🟤' },
+  { id: 5, name: 'Бойлы «Слива» 20мм, 500г', cat: 'boilies', price: 620, badge: '', badgeText: '',
+    desc: 'Бойлы с фруктовым ароматом сливы. Для крупного карпа.', img: '🟤' },
+  { id: 6, name: 'Бойлы «Fish Mix» 15мм, 1кг', cat: 'boilies', price: 950, badge: 'hit', badgeText: 'Хит продаж',
+    desc: 'Рыбная база с высоким содержанием протеина. Банка 1кг.', img: '🟤' },
+  { id: 7, name: 'Опарыш крупный, 100г', cat: 'live', price: 180, badge: '', badgeText: '',
+    desc: 'Свежий опарыш. Универсальная наживка для мирной рыбы.', img: '🪱' },
+  { id: 8, name: 'Червь навозный, 100г', cat: 'live', price: 150, badge: '', badgeText: '',
+    desc: 'Живой навозный червь. Отличная наживка для любой рыбы.', img: '🪱' },
+  { id: 9, name: 'Кукуруза сладкая, банка 340г', cat: 'plant', price: 120, badge: 'hit', badgeText: 'Хит продаж',
+    desc: 'Сладкая консервированная кукуруза. Карп, карась, лещ.', img: '🌽' },
+  { id: 10, name: 'Горох нут консервированный, 300г', cat: 'plant', price: 140, badge: '', badgeText: '',
+    desc: 'Мягкий нут для насадки. Отлично держится на крючке.', img: '🌽' },
+  { id: 11, name: 'Аттрактант «Клубника» 50мл', cat: 'attract', price: 290, badge: 'new', badgeText: 'Новинка',
+    desc: 'Жидкий дип с насыщенным ароматом клубники. Для бойлов и насадок.', img: '💧' },
+  { id: 12, name: 'Спрей-аттрактант «Чеснок» 60мл', cat: 'attract', price: 250, badge: '', badgeText: '',
+    desc: 'Спрей для быстрого привлечения рыбы. Аромат чеснока.', img: '💧' },
+];
+
+const CAT_NAMES = {
+  all: 'Все товары',
+  dry: 'Сухая прикормка',
+  boilies: 'Бойлы',
+  live: 'Живая наживка',
+  plant: 'Растительные насадки',
+  attract: 'Аттрактанты',
+};
+
+// ===== STATE =====
+let cart = [];
+let currentFilter = 'all';
+
+// ===== RENDER PRODUCTS =====
+function renderProducts() {
+  const grid = document.getElementById('productsGrid');
+  const items = currentFilter === 'all'
+    ? PRODUCTS
+    : PRODUCTS.filter(p => p.cat === currentFilter);
+  grid.innerHTML = items.map(p => `
+    <div class="product-card">
+      <div class="product-img" style="display:flex;align-items:center;justify-content:center;font-size:64px;">
+        ${p.img}
+      </div>
+      <div class="product-body">
+        ${p.badge ? `<span class="product-badge ${p.badge}">${p.badgeText}</span>` : ''}
+        <div class="product-name">${p.name}</div>
+        <div class="product-desc">${p.desc}</div>
+        <div class="product-price">${p.price} <span class="unit">₽</span></div>
+        <button class="add-btn" id="add-${p.id}" onclick="addToCart(${p.id})">
+          🛒 В корзину
+        </button>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ===== FILTER =====
+function filterCategory(cat) {
+  currentFilter = cat;
+  document.getElementById('filterLabel').textContent = CAT_NAMES[cat];
+  renderProducts();
+  document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+  closeNav();
+}
+
+// ===== CART =====
+function addToCart(id) {
+  const product = PRODUCTS.find(p => p.id === id);
+  const item = cart.find(i => i.id === id);
+  if (item) {
+    item.qty++;
+  } else {
+    cart.push({ ...product, qty: 1 });
+  }
+  updateCart();
+  showToast(`«${product.name}» добавлен в корзину`);
+  // кнопка-анимация
+  const btn = document.getElementById(`add-${id}`);
+  btn.classList.add('added');
+  btn.textContent = '✓ Добавлено!';
+  setTimeout(() => {
+    btn.classList.remove('added');
+    btn.textContent = '🛒 В корзину';
+  }, 1200);
+}
+
+function removeFromCart(id) {
+  cart = cart.filter(i => i.id !== id);
+  updateCart();
+}
+
+function changeQty(id, delta) {
+  const item = cart.find(i => i.id === id);
+  if (!item) return;
+  item.qty += delta;
+  if (item.qty <= 0) {
+    removeFromCart(id);
+  } else {
+    updateCart();
+  }
+}
+
+function updateCart() {
+  const count = cart.reduce((s, i) => s + i.qty, 0);
+  const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+  document.getElementById('cartCount').textContent = count;
+  document.getElementById('cartTotal').textContent = total.toLocaleString('ru-RU') + ' ₽';
+  document.getElementById('checkoutBtn').disabled = cart.length === 0;
+
+  const container = document.getElementById('cartItems');
+  if (cart.length === 0) {
+    container.innerHTML = `
+      <div class="cart-empty">
+        <span>🛒</span>
+        Корзина пуста.<br>Добавьте товары из каталога.
+      </div>`;
+    return;
+  }
+  container.innerHTML = cart.map(i => `
+    <div class="cart-item">
+      <div class="cart-item-img" style="display:flex;align-items:center;justify-content:center;font-size:32px;">${i.img}</div>
+      <div class="cart-item-info">
+        <div class="cart-item-name">${i.name}</div>
+        <div class="cart-item-price">${i.price} ₽ × ${i.qty} = <strong>${(i.price * i.qty).toLocaleString('ru-RU')} ₽</strong></div>
+        <div class="cart-item-controls">
+          <button class="qty-btn" onclick="changeQty(${i.id}, -1)">−</button>
+          <span class="qty-val">${i.qty}</span>
+          <button class="qty-btn" onclick="changeQty(${i.id}, 1)">+</button>
+          <button class="cart-item-remove" onclick="removeFromCart(${i.id})" title="Удалить">🗑</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ===== CART DRAWER =====
+function toggleCart() {
+  const drawer = document.getElementById('cartDrawer');
+  const overlay = document.getElementById('cartOverlay');
+  drawer.classList.toggle('open');
+  overlay.classList.toggle('open');
+}
+
+// ===== CHECKOUT =====
+function openCheckout() {
+  if (cart.length === 0) return;
+  const summary = document.getElementById('orderSummary');
+  summary.innerHTML = '<h3>Ваш заказ:</h3>' +
+    cart.map(i => `
+      <div class="order-line">
+        <span>${i.name} × ${i.qty}</span>
+        <span>${(i.price * i.qty).toLocaleString('ru-RU')} ₽</span>
+      </div>
+    `).join('') +
+    `<div class="order-line total">
+      <span>Итого:</span>
+      <span>${cartTotal()} ₽</span>
+    </div>`;
+  document.getElementById('checkoutModal').classList.add('open');
+  toggleCart();
+}
+
+function closeCheckout() {
+  document.getElementById('checkoutModal').classList.remove('open');
+}
+function closeCheckoutBg(e) {
+  if (e.target === e.currentTarget) closeCheckout();
+}
+
+function cartTotal() {
+  return cart.reduce((s, i) => s + i.price * i.qty, 0).toLocaleString('ru-RU');
+}
+
+function submitOrder(e) {
+  e.preventDefault();
+  const name = document.getElementById('oName').value;
+  const phone = document.getElementById('oPhone').value;
+  const address = document.getElementById('oAddress').value;
+  const comment = document.getElementById('oComment').value;
+
+  // Здесь можно отправить данные на сервер через fetch()
+  const orderData = {
+    customer: name,
+    phone: phone,
+    address: address,
+    comment: comment,
+    items: cart.map(i => ({ name: i.name, qty: i.qty, price: i.price })),
+    total: cart.reduce((s, i) => s + i.price * i.qty, 0),
+  };
+  console.log('Заказ оформлен:', orderData);
+
+  closeCheckout();
+  cart = [];
+  updateCart();
+  showToast('✅ Заказ оформлен! Мы свяжемся с вами в ближайшее время.');
+  return false;
+}
+
+// ===== CONTACT FORM =====
+function handleContact(e) {
+  e.preventDefault();
+  const name = document.getElementById('cName').value;
+  const phone = document.getElementById('cPhone').value;
+  const msg = document.getElementById('cMsg').value;
+  // Здесь можно отправить данные на сервер
+  console.log('Заявка:', { name, phone, msg });
+  document.getElementById('contactForm').reset();
+  showToast('✅ Заявка отправлена! Мы перезвоним в течение 15 минут.');
+  return false;
+}
+
+// ===== TOAST =====
+let toastTimer;
+function showToast(text) {
+  const toast = document.getElementById('toast');
+  toast.textContent = text;
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove('show'), 3000);
+}
+
+// ===== NAV =====
+function toggleNav() {
+  document.getElementById('nav').classList.toggle('open');
+}
+function closeNav() {
+  document.getElementById('nav').classList.remove('open');
+}
+
+// ===== SCROLL =====
+function scrollToProducts() {
+  document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+}
+
+// ===== INIT =====
+renderProducts();
+updateCart();
+</script>
+</body>
+</html>
